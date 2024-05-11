@@ -1,0 +1,27 @@
+class Solution {
+    public int countPrefixSuffixPairs(String[] words) {
+        int ans = 0;
+        
+        for(int i=0;i<words.length;i++){
+            for(int j=i+1;j<words.length;j++){
+                String str1 = words[i];
+                String str2 = words[j];
+                
+                if(check(str1, str2))   ans++;
+            }
+        }
+        return ans;
+    }
+    
+    boolean check(String a, String b){
+        if(a.length()>b.length())   return false;
+        for(int i=0;i<a.length();i++){
+            if(a.charAt(i) != b.charAt(i))  return false;
+        }
+        int count = b.length() - 1;
+        for(int i=a.length()-1;i>=0;i--){
+            if(a.charAt(i) != b.charAt(count--))  return false;
+        }
+        return true;
+    }
+}
